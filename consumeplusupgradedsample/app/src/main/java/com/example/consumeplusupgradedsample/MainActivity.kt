@@ -16,7 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.consumeplusupgradedsample.ui.screens.loginScreen.LoginPageView
 import com.example.consumeplusupgradedsample.ui.screens.loginScreen.SignInScreenViewmodel
 import com.example.consumeplusupgradedsample.ui.theme.ConsumeplusupgradedsampleTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @ExperimentalUnitApi
     override fun onCreate(savedInstanceState: Bundle?) {
