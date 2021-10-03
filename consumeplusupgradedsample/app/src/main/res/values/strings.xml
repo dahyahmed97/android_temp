@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">consumeplusupgradedsample</string>
+    <string name="title_activity_home_actvity">HomeActvity</string>
 </resources>

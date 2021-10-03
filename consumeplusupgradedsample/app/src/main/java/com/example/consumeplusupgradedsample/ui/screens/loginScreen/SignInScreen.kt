@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -32,11 +31,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.consumeplusupgradedsample.R
-import com.example.consumeplusupgradedsample.utils.CustomButton
-import com.example.consumeplusupgradedsample.utils.CustomTextFiled
-import com.example.consumeplusupgradedsample.utils.ProgressIndicator
-import com.example.consumeplusupgradedsample.utils.ToggleShowPasswordButton
-
+import com.example.consumeplusupgradedsample.utils.*
 
 
 @ExperimentalUnitApi
@@ -99,7 +94,7 @@ fun  LoginPageView(context: Context, navHostController: NavHostController, viewM
 
                         )
                     Text(
-                        text = "Login to Cotinue",
+                        text = "Login to Continue",
                         style = TextStyle(
                             color = Color(green = 32, red = 2, blue = 105),
                             fontSize = TextUnit(28f, TextUnitType.Sp),
@@ -162,7 +157,18 @@ fun  LoginPageView(context: Context, navHostController: NavHostController, viewM
 
             }
 
-          ProgressIndicator(showDialog = viewModel.isloading.value)
+          ProgressIndicator(showDialog = viewModel.loading.value)
+
+            CustomAlertDialog(
+                onDismiss = { viewModel.isAlertDialogVisible.value = false },
+                isDismissOnBack = true,
+                isDismissOnClickOutside =false ,
+                imageId = null ,
+                positiveButtonClicked = { viewModel.isAlertDialogVisible.value = false },
+                negativeButtonClicked = {viewModel.isAlertDialogVisible.value = false  },
+                dialogText = viewModel.alertDialogMessage.value ,
+                isDialogVisible = viewModel.isAlertDialogVisible.value
+            )
 
 
         }

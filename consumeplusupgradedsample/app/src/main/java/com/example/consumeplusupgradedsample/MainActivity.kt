@@ -1,5 +1,6 @@
 package com.example.consumeplusupgradedsample
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -40,7 +41,7 @@ fun NavigationComponent(navController: NavHostController ,context: Context) {
         startDestination = "SignIn"
     ) {
         composable("SignIn") {
-            val viewmodel = viewModel<SignInScreenViewmodel>()
+            val viewmodel = hiltViewModel<SignInScreenViewmodel>()
             LoginPageView(context,navController,viewmodel)
         }
 

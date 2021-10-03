@@ -9,8 +9,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.RemoveRedEye
 import androidx.compose.runtime.Composable
@@ -25,16 +25,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.consumeplusupgradedsample.R
 
 
+@ExperimentalCoilApi
 @ExperimentalUnitApi
 @Composable
 fun ExtendedTopAppBar(backClicked:()->Unit, notificationsClicked:()->Unit , imageUrl: String , name:String){
@@ -87,7 +90,7 @@ fun ExtendedTopAppBar(backClicked:()->Unit, notificationsClicked:()->Unit , imag
 
 @Composable
 fun IconButton(clicked:()->Unit, icon:ImageVector){
-    androidx.compose.material.IconButton(onClick = clicked) {
+  IconButton(onClick = clicked) {
         Icon(
             imageVector = icon,
             contentDescription = "",
@@ -108,6 +111,7 @@ fun TitleText(title:String){
 }
 
 
+@ExperimentalCoilApi
 @Composable
 fun RoundedImage(imageUrl:String){
 
@@ -151,7 +155,7 @@ fun CustomButton(
 
 @Composable
 fun ToggleShowPasswordButton(clicked:()->Unit){
-    IconButton(onClick = clicked,) {
+    IconButton(onClick = clicked) {
         Icon(
             imageVector = Icons.Filled.RemoveRedEye,
             contentDescription ="",
@@ -225,7 +229,7 @@ fun CustomAlertDialog(
     onDismiss:()->Unit,
     isDismissOnBack:Boolean,
     isDismissOnClickOutside:Boolean,
-    imageId:Int,
+    imageId: Int?,
     positiveButtonClicked:()->Unit,
     negativeButtonClicked:()->Unit,
     dialogText:String,
@@ -240,7 +244,7 @@ fun CustomAlertDialog(
             )
         ) {
             Column {
-                Image(painter = painterResource(id = imageId), contentDescription = "popup Image")
+                Image(painter = painterResource(id = imageId!!), contentDescription = "popup Image")
 
                 Text(
                     text = dialogText,
@@ -281,5 +285,54 @@ fun CustomAlertDialog(
                 }
             }
         }
+    }
+}
+
+@Composable
+
+fun BottomTabBar(){
+    BottomNavigation(
+        modifier=Modifier.fillMaxWidth().padding(12.dp)
+            .clip(RoundedCornerShape(25.dp)),
+        backgroundColor = Color(227,227,227),
+        elevation = 5.dp,
+
+    ) {
+        BottomNavigationItem(
+            icon = { Icons.Filled.Home },
+            label = { Text(text = "Home")},
+            alwaysShowLabel = false, // This hides the title for the unselected items
+            onClick = {},
+            selected = true,
+            selectedContentColor = Color(0,165,155)
+
+        )
+        BottomNavigationItem(
+            icon = { Icons.Filled.Home },
+            label = { Text(text = "Home")},
+            alwaysShowLabel = false, // This hides the title for the unselected items
+            onClick = {},
+            selected = true,
+            selectedContentColor = Color(0,165,155)
+
+        )
+        BottomNavigationItem(
+            icon = { Icons.Filled.Home },
+            label = { Text(text = "Home")},
+            alwaysShowLabel = false, // This hides the title for the unselected items
+            onClick = {},
+            selected = true,
+            selectedContentColor = Color(0,165,155)
+
+        )
+        BottomNavigationItem(
+            icon = { Icons.Filled.Home },
+            label = { Text(text = "Home")},
+            alwaysShowLabel = false, // This hides the title for the unselected items
+            onClick = {},
+            selected = true,
+            selectedContentColor = Color(0,165,155)
+
+        )
     }
 }

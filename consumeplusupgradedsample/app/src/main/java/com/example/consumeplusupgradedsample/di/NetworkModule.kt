@@ -3,23 +3,22 @@ package com.example.consumeplusupgradedsample.di
 
 import com.example.consumeplusupgradedsample.network.ApiService
 import com.example.consumeplusupgradedsample.network.MainRepository
-import com.google.gson.Gson
+import com.example.consumeplusupgradedsample.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    private  val BASE_URL = "http://41.33.224.195:8180/"
+    private  val baseUrl = "http://41.33.224.195:8180/"
 
 
     @Singleton
@@ -27,6 +26,7 @@ class NetworkModule {
     fun providesHttpLoggingInterceptor() = HttpLoggingInterceptor()
         .apply {
             level = HttpLoggingInterceptor.Level.BODY
+
         }
 
     @Singleton
@@ -35,13 +35,19 @@ class NetworkModule {
         OkHttpClient
             .Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", Constants.Token)
+                    .addHeader("Accept","application/json")
             .build()
+        chain.proceed(newRequest)
+    }.build()
 
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
+        .baseUrl(baseUrl)
         .client(okHttpClient)
         .build()
 

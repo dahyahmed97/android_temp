@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Consumeplusupgradedsample">
         <activity
+            android:name=".HomeActvity"
+            android:exported="true"
+            android:label="@string/title_activity_home_actvity"
+            android:theme="@style/Theme.Consumeplusupgradedsample.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
