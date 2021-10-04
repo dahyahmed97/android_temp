@@ -11,9 +11,11 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import coil.annotation.ExperimentalCoilApi
 import com.example.consumeplusupgradedsample.ui.theme.ConsumeplusupgradedsampleTheme
 import com.example.consumeplusupgradedsample.utils.BottomTabBar
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalCoilApi
 @ExperimentalUnitApi
+@AndroidEntryPoint
 class HomeActvity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

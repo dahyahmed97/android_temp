@@ -160,12 +160,12 @@ fun  LoginPageView(context: Context, navHostController: NavHostController, viewM
           ProgressIndicator(showDialog = viewModel.loading.value)
 
             CustomAlertDialog(
-                onDismiss = { viewModel.isAlertDialogVisible.value = false },
+                onDismiss = { viewModel.dismissDialog() },
                 isDismissOnBack = true,
-                isDismissOnClickOutside =false ,
+                isDismissOnClickOutside =true ,
                 imageId = null ,
-                positiveButtonClicked = { viewModel.isAlertDialogVisible.value = false },
-                negativeButtonClicked = {viewModel.isAlertDialogVisible.value = false  },
+                positiveButtonClicked = { viewModel.dismissDialog() },
+                negativeButtonClicked = {viewModel.dismissDialog() },
                 dialogText = viewModel.alertDialogMessage.value ,
                 isDialogVisible = viewModel.isAlertDialogVisible.value
             )

@@ -28,6 +28,9 @@ class SignInScreenViewmodel @Inject constructor(
     var alertDialogMessage = mutableStateOf("")
     var loading = mutableStateOf(false)
 
+    fun dismissDialog(){
+        isAlertDialogVisible.value=false;
+    }
 
     fun formValidation(phone:String?,password:String?){
         if(phone!=null){

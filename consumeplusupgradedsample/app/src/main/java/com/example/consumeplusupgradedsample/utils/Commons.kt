@@ -25,7 +25,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -35,6 +34,7 @@ import androidx.compose.ui.window.DialogProperties
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.consumeplusupgradedsample.R
+import okhttp3.internal.wait
 
 
 @ExperimentalCoilApi
@@ -237,50 +237,71 @@ fun CustomAlertDialog(
 ) {
     if(isDialogVisible){
         Dialog(
-            onDismissRequest = { onDismiss },
+
+            onDismissRequest={onDismiss()},
             DialogProperties(
                 dismissOnBackPress = isDismissOnBack,
                 dismissOnClickOutside = isDismissOnClickOutside
-            )
+            ),
         ) {
-            Column {
-                Image(painter = painterResource(id = imageId!!), contentDescription = "popup Image")
-
-                Text(
-                    text = dialogText,
-                    style = TextStyle(
-                        color = Color.White, fontSize = TextUnit(value = 14f, type = TextUnitType.Sp),
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.padding(10.dp)
+            Box(
+                modifier = Modifier
+                    .background(color = Color.White, shape = RoundedCornerShape(25.dp))
+                    .width(400.dp)
+                    .height(400.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    OutlinedButton(
-                        onClick = { positiveButtonClicked },
-                        modifier = Modifier.clip(shape = RoundedCornerShape(10.dp)),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            backgroundColor = Color.Green,
-                            contentColor = Color.White,
-                            disabledContentColor = Color.LightGray
-                        ),
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_login_artwork),
+                        contentDescription = "popup Image"
+                    )
 
-                        ) {
-                        Text(text = "OK")
-                    }
-                    OutlinedButton(
-                        onClick = { negativeButtonClicked },
-                        modifier = Modifier.clip(shape = RoundedCornerShape(10.dp)),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            backgroundColor = Color.Red,
-                            contentColor = Color.White,
-                            disabledContentColor = Color.LightGray
+                    Text(
+                        text = dialogText,
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = TextUnit(value = 14f, type = TextUnitType.Sp),
+                            fontWeight = FontWeight.Bold
                         ),
+                        modifier=Modifier.padding(10.dp)
+                    )
 
-                        ) {
-                        Text(text = "Cancel")
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.padding(10.dp)
+                    ) {
+                        OutlinedButton(
+                            onClick = { positiveButtonClicked() },
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .padding(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                backgroundColor = Color.Green,
+                                contentColor = Color.White,
+                                disabledContentColor = Color.LightGray
+                            ),
+
+                            ) {
+                            Text(text = "OK")
+                        }
+                        OutlinedButton(
+                            onClick = { negativeButtonClicked() },
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .padding(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                backgroundColor = Color.Red,
+                                contentColor = Color.White,
+                                disabledContentColor = Color.LightGray
+                            ),
+
+                            ) {
+                            Text(text = "Cancel")
+                        }
                     }
                 }
             }
@@ -290,49 +311,100 @@ fun CustomAlertDialog(
 
 @Composable
 
-fun BottomTabBar(){
-    BottomNavigation(
-        modifier=Modifier.fillMaxWidth().padding(12.dp)
-            .clip(RoundedCornerShape(25.dp)),
-        backgroundColor = Color(227,227,227),
-        elevation = 5.dp,
+fun BottomTabBar() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Bottom
 
     ) {
-        BottomNavigationItem(
-            icon = { Icons.Filled.Home },
-            label = { Text(text = "Home")},
-            alwaysShowLabel = false, // This hides the title for the unselected items
-            onClick = {},
-            selected = true,
-            selectedContentColor = Color(0,165,155)
+        Box {
+            BottomNavigation(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.115f)
+                    .padding(12.dp)
+                    .clip(RoundedCornerShape(25.dp)),
+                backgroundColor = Color(227, 227, 227),
+                elevation = 5.dp,
 
-        )
-        BottomNavigationItem(
-            icon = { Icons.Filled.Home },
-            label = { Text(text = "Home")},
-            alwaysShowLabel = false, // This hides the title for the unselected items
-            onClick = {},
-            selected = true,
-            selectedContentColor = Color(0,165,155)
+                ) {
 
-        )
-        BottomNavigationItem(
-            icon = { Icons.Filled.Home },
-            label = { Text(text = "Home")},
-            alwaysShowLabel = false, // This hides the title for the unselected items
-            onClick = {},
-            selected = true,
-            selectedContentColor = Color(0,165,155)
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    BottomNavigationItem(
+                        icon = { Icon(painter = painterResource(id = R.drawable.ic_nav_home_icon), contentDescription ="" ) },
+                        label = { Text(text = "Home") },
+                        alwaysShowLabel = false, // This hides the title for the unselected items
+                        onClick = {},
+                        selected = true,
+                        selectedContentColor = Color(0, 165, 155)
 
-        )
-        BottomNavigationItem(
-            icon = { Icons.Filled.Home },
-            label = { Text(text = "Home")},
-            alwaysShowLabel = false, // This hides the title for the unselected items
-            onClick = {},
-            selected = true,
-            selectedContentColor = Color(0,165,155)
+                    )
+                    BottomNavigationItem(
+                        icon = { Icon(painter = painterResource(id = R.drawable.ic_cart_nav_icon), contentDescription ="" ) },
+                        label = { Text(text = "Cart") },
+                        alwaysShowLabel = false, // This hides the title for the unselected items
+                        onClick = {},
+                        selected = true,
+                        selectedContentColor = Color(0, 165, 155)
 
-        )
+                    )
+                    BottomNavigationItem(
+                        icon = { Icon(painter = painterResource(id = R.drawable.ic_fav_nav_icon), contentDescription ="" ) },
+                        label = { Text(text = "Calc") },
+                        alwaysShowLabel = false, // This hides the title for the unselected items
+                        onClick = {},
+                        selected = true,
+                        selectedContentColor = Color(0, 165, 155)
+
+                    )
+                    BottomNavigationItem(
+                        icon = { Icon(painter = painterResource(id = R.drawable.ic_cart_nav_icon), contentDescription ="" ) },
+                        label = { Text(text = "Favorite") },
+                        alwaysShowLabel = false, // This hides the title for the unselected items
+                        onClick = {},
+                        selected = true,
+                        selectedContentColor = Color(0, 165, 155)
+
+                    )
+                    BottomNavigationItem(
+                        icon = { Icon(painter = painterResource(id = R.drawable.ic_more_nav_icon), contentDescription ="" ) },
+                        label = { Text(text = "more") },
+                        alwaysShowLabel = false, // This hides the title for the unselected items
+                        onClick = {},
+                        selected = true,
+                        selectedContentColor = Color(0, 165, 155)
+
+                    )
+                }
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier= Modifier
+                    .fillMaxWidth()
+                    .padding(0.dp)
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .width(120.dp)
+                        .height(120.dp)
+                        .padding(bottom =85.dp),
+                    onClick = {},
+
+                    ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.nav_offers_btn),
+                        contentDescription = "",
+
+                        )
+                }
+            }
+
+        }
+
     }
 }
+
