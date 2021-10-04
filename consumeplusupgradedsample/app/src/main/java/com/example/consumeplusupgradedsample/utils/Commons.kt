@@ -396,7 +396,7 @@ fun BottomTabBar() {
 
                     ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.nav_offers_btn),
+                        painter = painterResource(id = R.drawable.ic_cart_nav_icon),
                         contentDescription = "",
 
                         )
