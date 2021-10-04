@@ -57,11 +57,11 @@ fun ExtendedTopAppBar(backClicked:()->Unit, notificationsClicked:()->Unit , imag
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                IconButton(clicked = { backClicked }, icon = Icons.Filled.ArrowBackIosNew )
+                IconButton(clicked = { backClicked() }, icon = Icons.Filled.ArrowBackIosNew )
 
                 TitleText(title = "Consumer Finance")
 
-                IconButton(clicked = { notificationsClicked }, icon = Icons.Filled.Notifications )
+                IconButton(clicked = { notificationsClicked() }, icon = Icons.Filled.Notifications )
             }
             Row(
                 modifier = Modifier.padding(bottom = 10.dp),
@@ -322,7 +322,7 @@ fun BottomTabBar() {
             BottomNavigation(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.115f)
+                    .fillMaxHeight(0.11f)
                     .padding(12.dp)
                     .clip(RoundedCornerShape(25.dp)),
                 backgroundColor = Color(227, 227, 227),
@@ -353,12 +353,16 @@ fun BottomTabBar() {
 
                     )
                     BottomNavigationItem(
-                        icon = { Icon(painter = painterResource(id = R.drawable.ic_fav_nav_icon), contentDescription ="" ) },
-                        label = { Text(text = "Calc") },
+                        icon = { Icon(
+                            painter = painterResource(id = R.mipmap.ic_offers),
+                            contentDescription ="",
+                            modifier = Modifier.border(width = 5.dp , color = Color.White , shape = CircleShape)
+                        ) },
                         alwaysShowLabel = false, // This hides the title for the unselected items
                         onClick = {},
                         selected = true,
-                        selectedContentColor = Color(0, 165, 155)
+                        selectedContentColor = Color(0, 165, 155),
+                        modifier = Modifier.padding(5.dp)
 
                     )
                     BottomNavigationItem(
@@ -381,27 +385,7 @@ fun BottomTabBar() {
                     )
                 }
             }
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier= Modifier
-                    .fillMaxWidth()
-                    .padding(0.dp)
-            ) {
-                IconButton(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(120.dp)
-                        .padding(bottom =85.dp),
-                    onClick = {},
 
-                    ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_cart_nav_icon),
-                        contentDescription = "",
-
-                        )
-                }
-            }
 
         }
 
