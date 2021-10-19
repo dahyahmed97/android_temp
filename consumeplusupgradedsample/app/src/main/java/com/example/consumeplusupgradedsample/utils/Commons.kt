@@ -311,7 +311,7 @@ fun CustomAlertDialog(
 
 @Composable
 
-fun BottomTabBar() {
+fun BottomBar() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize(),

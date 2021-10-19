@@ -20,6 +20,7 @@ import javax.inject.Inject
 class SignInScreenViewmodel @Inject constructor(
     private  val repo: MainRepository
 ) : ViewModel()  {
+
     var phoneNumberText = mutableStateOf("")
     var passwordText = mutableStateOf("")
     var isNextButtonEnabled = mutableStateOf(false)

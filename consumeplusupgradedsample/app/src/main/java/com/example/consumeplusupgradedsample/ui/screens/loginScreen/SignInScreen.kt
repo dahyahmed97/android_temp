@@ -30,11 +30,13 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.annotation.ExperimentalCoilApi
 import com.example.consumeplusupgradedsample.R
 import com.example.consumeplusupgradedsample.utils.*
 
 
 @ExperimentalUnitApi
+@ExperimentalCoilApi
 @Composable
 fun  LoginPageView(context: Context, navHostController: NavHostController, viewModel: SignInScreenViewmodel){
 
